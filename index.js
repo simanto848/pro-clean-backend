@@ -26,6 +26,9 @@ import { csrfProtection } from './middlewares/csrf.js';
 
 const app = express();
 
+// Enable trust proxy for Vercel
+app.set('trust proxy', 1);
+
 if (!process.env.MONGO_URI && process.env.MONGO_URL) {
     process.env.MONGO_URI = process.env.MONGO_URL;
 }
@@ -43,8 +46,8 @@ app.use((req, res, next) => {
 });
 
 const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3001';
-const corsOrigins = process.env.CORS_ORIGINS 
-    ? process.env.CORS_ORIGINS.split(',') 
+const corsOrigins = process.env.CORS_ORIGINS
+    ? process.env.CORS_ORIGINS.split(',')
     : [frontendUrl, 'http://localhost:3000'];
 
 app.use(cors({
