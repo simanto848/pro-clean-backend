@@ -7,7 +7,7 @@ export const csrfProtection = (req, res, next) => {
         res.cookie('XSRF-TOKEN', csrfToken, {
             httpOnly: false,
             secure: process.env.NODE_ENV === 'production',
-            sameSite: 'Lax',
+            sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
         });
         // Also send in header for cross-origin synchronization
         res.setHeader('X-CSRF-Token', csrfToken);
