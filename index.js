@@ -126,6 +126,8 @@ const server = app.listen(PORT, () => {
     logger.info(`Server is running on port ${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
 });
 
+export default app;
+
 process.on('SIGTERM', () => {
     console.log('SIGTERM received, shutting down gracefully...');
     server.close(() => {
